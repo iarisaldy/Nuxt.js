@@ -1,5 +1,5 @@
 export const state = () => ({
-    isAuth:false,
+    isAuth:true,
     mutations: {
         SET_IS_AUTH(state, payload) {
           state.isAuth = payload;
