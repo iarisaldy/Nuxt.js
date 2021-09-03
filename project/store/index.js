@@ -1,10 +1,10 @@
 export const state = () => ({
-    isAuth:true,
-    mutations: {
-        SET_IS_AUTH(state, payload) {
-          state.isAuth = payload;
-        },
-    }
+    isAuth:true
+    // mutations: {
+    //     SET_IS_AUTH(state, payload) {
+    //       state.isAuth = payload;
+    //     },
+    // }
 })
 
 export const mutation = {     

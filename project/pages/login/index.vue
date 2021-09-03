@@ -58,13 +58,13 @@ export default {
 		}
 	},
 	methods:{
-		...mapMutations(['SET_IS_AUTH']),
+		//...mapMutations(['SET_IS_AUTH']),
 		submit()
 		{
-			this.SET_IS_AUTH(true)
+			//this.SET_IS_AUTH(true)
             // this.$store.commit('setAuth', true);
 			this.$router.push('/homepage')
-			console.log(this.$store.state.isAuth)
+			//console.log(this.$store.state.isAuth)
 		}
 
 	}
