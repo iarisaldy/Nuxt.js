@@ -55,7 +55,10 @@ class UserController extends Controller
         {
             $filename = Str::random(5).$request->email.'.jpg';
             $file = $request->file('photo');
-            $file->move(base_path('public/image'), $filename);
+            $file->move(base_path('/public/image'), $filename);
+            $file_name = $user->photo;
+            $file_delete = dirname(__FILE__, 4) . '\public\image\\' . $file_name;
+            unlink($file_delete);
         } 
         $user->update([
             'name' => $request->name,
@@ -69,6 +72,15 @@ class UserController extends Controller
             'status' => $request->status
         ]);
 
+        return response()->json(['status'=>'success']);
+    }
+
+    public function destroy($id){
+        $user= User::find($id);
+        $file_name = $user->photo;
+        $file_delete = dirname(__FILE__, 4) . '\public\image\\' . $file_name;
+        unlink($file_delete);
+        $user->delete();
         return response()->json(['status'=>'success']);
     }
 }
