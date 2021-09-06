@@ -9,5 +9,6 @@ class UserController extends Controller
     {
         $users = User::orderBy('create_at','desc')->paginate(10);
         return response()->json(['status' => 'success', 'data' => $users]);
+        //return response()->json(['users' => 'Muhamad Irfan Arisaldy', 'isAuth' => 'true' , 'status' => 'true']);
     }
 }
