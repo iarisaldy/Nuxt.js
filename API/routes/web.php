@@ -16,3 +16,5 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/API/users','UserController@index');
+$router->post('/API/users','UserController@store');
+$router->get('/API/users/{id}','UserController@edit');
