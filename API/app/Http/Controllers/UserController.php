@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,6 +17,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required|string|max:50',
+            'identity_id' => 'required|string|unique:users',
+            'gender' => 'required',
+            'address' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'phone_number' => 'required|string',
+            'role' => 'required',
+            'status' => 'required'
+        ]);
+
         $filename = null;
         if ($request -> hasFile('photo'))
         {
@@ -33,7 +47,6 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => app('hash')->make($request->password),
             'phone_number' => $request->phone_number,
-            //'api_token' => 'test',
             'role' => $request->role,
             'status' => $request->status
         ]);
@@ -48,6 +61,19 @@ class UserController extends Controller
 
     public function update(Request $request,$id)
     {
+        $this->validate($request,[
+            'name' => 'required|string|max:50',
+            'identity_id' => 'required|string|unique:users,identity_id,'.$id,
+            'gender' => 'required',
+            'address' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'required|min:6',
+            'phone_number' => 'required|string',
+            'role' => 'required',
+            'status' => 'required'
+        ]);
+
         $user= User::find($id);
         $password= $request->password != '' ? app('hash')->make($request->password):$user->password;
         $filename = $user->photo;
@@ -56,9 +82,6 @@ class UserController extends Controller
             $filename = Str::random(5).$request->email.'.jpg';
             $file = $request->file('photo');
             $file->move(base_path('/public/image'), $filename);
-            $file_name = $user->photo;
-            $file_delete = dirname(__FILE__, 4) . '\public\image\\' . $file_name;
-            unlink($file_delete);
         } 
         $user->update([
             'name' => $request->name,
@@ -82,5 +105,33 @@ class UserController extends Controller
         unlink($file_delete);
         $user->delete();
         return response()->json(['status'=>'success']);
+    }
+
+    public function login(Request $request){
+        $this->validate($request, [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:6'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if($user && Hash::check($request->password, $user->password)){
+            $token = Str::random(40);
+            $user->update(['api_token' =>$token]);
+            return response()->json(['status'=>'success', 'data'=>$token ]);
+        }
+        return response()->json(['status'=>'error']);
+    }
+
+    public function sendResetToken(Request $request, $token)
+    {
+        $this->validate($request, [
+            'password' => 'required|string|min:6'
+        ]);
+        $user = User::where('reset_token', $token)->first();
+        if($user){
+            $user->update(['password'=>app('hash')->make($request->password)]);
+            return response()->json(['status'=>'success']);
+        }
+        return response()->json(['status'=>'error']);
     }
 }
