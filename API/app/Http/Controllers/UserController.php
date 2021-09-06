@@ -46,5 +46,29 @@ class UserController extends Controller
         return response()->json(['status'=>'success', 'data'=>$user]);
     }
 
-    public function 
+    public function update(Request $request,$id)
+    {
+        $user= User::find($id);
+        $password= $request->password != '' ? app('hash')->make($request->password):$user->password;
+        $filename = $user->photo;
+        if ($request -> hasFile('photo'))
+        {
+            $filename = Str::random(5).$request->email.'.jpg';
+            $file = $request->file('photo');
+            $file->move(base_path('public/image'), $filename);
+        } 
+        $user->update([
+            'name' => $request->name,
+            'identity_id' => $request->identity_id,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'photo' => $filename,
+            'password' => $password,
+            'phone_number' => $request->phone_number,
+            'role' => $request->role,
+            'status' => $request->status
+        ]);
+
+        return response()->json(['status'=>'success']);
+    }
 }
