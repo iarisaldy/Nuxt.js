@@ -1,14 +1,50 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 use App\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('create_at','desc')->paginate(10);
+        $users = User::orderBy('created_at','desc')->paginate(10);
         return response()->json(['status' => 'success', 'data' => $users]);
-        //return response()->json(['users' => 'Muhamad Irfan Arisaldy', 'isAuth' => 'true' , 'status' => 'true']);
     }
+
+    public function store(Request $request)
+    {
+        $filename = null;
+        if ($request -> hasFile('photo'))
+        {
+            $filename = Str::random(5).$request->email.'.jpg';
+            $file = $request->file('photo');
+            $file->move(base_path('public/image'), $filename);
+        }
+
+        User::create([
+            'name' => $request->name,
+            'identity_id' => $request->identity_id,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'photo' => $filename,
+            'email' => $request->email,
+            'password' => app('hash')->make($request->password),
+            'phone_number' => $request->phone_number,
+            //'api_token' => 'test',
+            'role' => $request->role,
+            'status' => $request->status
+        ]);
+        return response()->json(['status'=>'success']);
+    }
+
+    public function edit($id)
+    {
+        $user= User::find($id);
+        return response()->json(['status'=>'success', 'data'=>$user]);
+    }
+
+    public function 
 }
