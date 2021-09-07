@@ -45,14 +45,24 @@ export default {
     '@nuxtjs/auth-next'
   ],
   auth: {
-    // Options
+    strategies: {
+      local:{
+        endpoints:{
+          login:{url:'/login', method:'post', propetyName:'token'},
+          logout:{url:'/users', method:'delete'},
+          user:{url:'/users', method:'get', propetyName:'user'},
+        },
+        //tokenRequired:true,
+        tokenType:'Bearer'
+      }
+    }
   },
   router: {
-    // middleware: ['auth']
+    middleware: ['auth']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {baseURL: 'http://localhost:8000/API'},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

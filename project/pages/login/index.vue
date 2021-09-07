@@ -48,7 +48,7 @@
 <script>
 import {mapMutations} from 'vuex'
 export default {
-    //auth: false,
+     auth: false,
 	data(){
 		return{
 			auth:{
@@ -62,11 +62,16 @@ export default {
 		submit()
 		{
 			//this.SET_IS_AUTH(true)
-            // this.$store.commit('setAuth', true);
-			this.$router.push('/homepage')
-			//console.log(this.$store.state.isAuth)
+            this.$auth.loginWith('local',{
+                data:{
+                    email: this.auth.email,
+                    password: this.auth.password
+                }
+            }).then(()=>{
+                this.$router.push('/')
+            })
+			//console.log(this.auth.email)
 		}
-
 	}
 }
 </script>

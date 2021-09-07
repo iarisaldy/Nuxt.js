@@ -11,8 +11,14 @@
 |
 */
 
+use Illuminate\Support\Str;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->get('/Key',function(){
+    return Str::random(32);
 });
 
 $router->post('/API/login','UserController@login');
