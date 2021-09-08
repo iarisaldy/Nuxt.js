@@ -55,13 +55,13 @@ export default {
           type: 'Bearer'
         },
         user: {
-          property: false,
+          property: 'data',
           autoFetch: true
         },
         endpoints: {
-          login:{url:'http://localhost:3001/API/login', method:'get'},
-          logout:{url:'http://localhost:3001/API/users', method:'delete'},
-          user:{url:'http://localhost:3001/API/users', method:'get'}
+          login:{url:'/login', method:'post'},
+          logout:{url:'/users', method:'delete'},
+          user:{url:'/users/login', method:'get'}
         }
       }
     }
@@ -73,10 +73,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true
+    baseURL: 'http://localhost:8000/API'
   },
   proxy: {
-    '/API/login': { target: 'http://localhost:3001'}
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

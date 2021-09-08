@@ -61,13 +61,13 @@ export default {
     },
 	methods:{
 		submit(){
-            this.$auth.loginWith('local', { data: this.auth })
-            .then((res)=>{
-                console.log(this.$auth)
+            this.$auth.loginWith('local', {
+                 data: {
+                     email:this.auth.email,
+                     password:this.auth.password 
+                 }
+            }).then(()=>{
                 this.$router.push('/homepage')
-            })
-            .catch ((err)=>{
-                console.log('error')
             })
         }
 	}
