@@ -46,9 +46,8 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
 export default {
-     auth: false,
+    auth: false,
 	data(){
 		return{
 			auth:{
@@ -57,21 +56,20 @@ export default {
 			}
 		}
 	},
+    mounted(){
+        console.log(this.$auth)
+    },
 	methods:{
-		//...mapMutations(['SET_IS_AUTH']),
-		submit()
-		{
-			//this.SET_IS_AUTH(true)
-            this.$auth.loginWith('local',{
-                data:{
-                    email: this.auth.email,
-                    password: this.auth.password
-                }
-            }).then(()=>{
-                this.$router.push('/')
+		submit(){
+            this.$auth.loginWith('local', { data: this.auth })
+            .then((res)=>{
+                console.log(this.$auth)
+                this.$router.push('/homepage')
             })
-			//console.log(this.auth.email)
-		}
+            .catch ((err)=>{
+                console.log('error')
+            })
+        }
 	}
 }
 </script>

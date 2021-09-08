@@ -1,4 +1,4 @@
-<template>
+<template >
     <div class="text-center">
         <div class="container">
     <!-- Outer Row -->
@@ -32,6 +32,12 @@
 </template>
 <script>
 export default {
+    auth: false,
+    data(){
+        return{
+            isAuth:true
+        }
+    },
     methods:{
 		submit()
 		{

@@ -17,11 +17,11 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/Key',function(){
+$router->get('/key',function(){
     return Str::random(32);
 });
 
-$router->post('/API/login','UserController@login');
+$router->get('/API/login','UserController@login');
 $router->post('/API/reset','UserController@sendResetPassword');
 $router->put('/API/reset/{token}','UserController@verifyResetPassword');
 

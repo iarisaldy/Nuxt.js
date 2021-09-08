@@ -42,27 +42,42 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy'
   ],
   auth: {
     strategies: {
-      local:{
-        endpoints:{
-          login:{url:'/login', method:'post', propetyName:'token'},
-          logout:{url:'/users', method:'delete'},
-          user:{url:'/users', method:'get', propetyName:'user'},
+      local: {
+        token: {
+          property: 'data',
+          global: true,
+          required: true,
+          type: 'Bearer'
         },
-        //tokenRequired:true,
-        tokenType:'Bearer'
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {
+          login:{url:'http://localhost:3001/API/login', method:'get'},
+          logout:{url:'http://localhost:3001/API/users', method:'delete'},
+          user:{url:'http://localhost:3001/API/users', method:'get'}
+        }
       }
     }
   },
+
   router: {
     middleware: ['auth']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {baseURL: 'http://localhost:8000/API'},
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/API/login': { target: 'http://localhost:3001'}
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
