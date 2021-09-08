@@ -10,6 +10,8 @@ export const mutations = {
 
 export const actions = {
     nuxtServerInit({commit}, context){
-        commit('SET_IS_AUTH',context.app.$auth.$state.loggedIn)
+        commit('SET_IS_AUTH', context.isDev)
+        //console.log(context.isDev)
+        //console.log(context.app.$auth.$state)
     }
 }
