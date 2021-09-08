@@ -1,4 +1,4 @@
-<template >
+<template>
     <div class="text-center">
         <div class="container">
     <!-- Outer Row -->
@@ -11,16 +11,6 @@
                       <!-- Nested Row within Card Body -->
                       <div class="row">
                           <div class="col-lg-12">
-                              <div class="p-5">
-                                  <div class="text-center">
-                                      <h1 class="h4 text-gray-900 mb-4">Menu</h1>
-                                  </div>
-                                  <form class="menu">
-                                      <a href="javascript:void(0)" @click="submit" class="btn btn-primary btn-user btn-block">
-                                          Login
-                                      </a>
-                                  </form>
-                              </div>
                           </div>
                       </div>
                   </div>
@@ -32,18 +22,5 @@
 </template>
 <script>
 export default {
-    auth: false,
-    data(){
-        return{
-            isAuth:true
-        }
-    },
-    methods:{
-		submit()
-		{
-			this.$router.push('/login')
-		}
-
-	}
 }
 </script>
