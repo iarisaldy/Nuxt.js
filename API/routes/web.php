@@ -31,7 +31,9 @@ $router->group(['middleware' =>'auth'], function() use($router){
     $router->post('/API/users','UserController@store');
     $router->put('/API/users/{id}','UserController@update');
     $router->delete('/API/users/{id}','UserController@destroy');  
-    $router->get('/API/users/login','UserController@getUserLogin');  
+    $router->get('/API/users/login','UserController@getUserLogin'); 
+    
+    $router->post('/API/logout','UserController@logout'); 
 });
 
 
