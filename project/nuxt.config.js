@@ -60,7 +60,7 @@ export default {
         },
         endpoints: {
           login:{url:'/login', method:'post'},
-          logout:{url:'/users', method:'delete'},
+          logout:{url:'/logout', method:'post'},
           user:{url:'/users/login', method:'get'}
         }
       }

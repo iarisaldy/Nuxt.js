@@ -19,11 +19,6 @@
 	import Footer from '@/components/layouts/Footer.vue'
 	import {mapState} from 'vuex'
 	export default {
-		data(){
-			return{
-				//isAuth:true
-			}	
-		},
 		computed:{
 			...mapState(['isAuth'])
 		},

@@ -191,20 +191,26 @@
                         Activity Log
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="http://localhost:3000/login">
+                    <a class="dropdown-item" @click="logout" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
                 </div>
             </li>
-
         </ul>
-
     </nav>
     <!-- End of Topbar -->
 </template>
 <script>
+import {mapMutations} from 'vuex'
 export default {
-    
+        methods:{
+        ...mapMutations(['SET_IS_AUTH']),
+        async logout(){
+            await this.$auth.logout()
+            this.$router.push('/login')
+            this.SET_IS_AUTH(false)
+        }
+    }
 }
 </script>
