@@ -27,11 +27,11 @@ $router->put('/API/reset/{token}','UserController@verifyResetPassword');
 
 $router->group(['middleware' =>'auth'], function() use($router){
     $router->get('/API/users','UserController@index');
-    $router->get('/API/users/{id}','UserController@edit');
     $router->post('/API/users','UserController@store');
+    $router->get('/API/users/login','UserController@getUserLogin'); 
+    $router->get('/API/users/{id}','UserController@edit');
     $router->put('/API/users/{id}','UserController@update');
     $router->delete('/API/users/{id}','UserController@destroy');  
-    $router->get('/API/users/login','UserController@getUserLogin'); 
     
     $router->post('/API/logout','UserController@logout'); 
 });
