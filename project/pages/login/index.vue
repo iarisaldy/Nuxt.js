@@ -60,8 +60,8 @@ export default {
     mounted(){
         if(this.$auth.loggedIn){
             this.$router.push('/')
+            this.SET_IS_AUTH(true)
         }
-        console.log(this.$auth);
     },
 	methods:{
         ...mapMutations(['SET_IS_AUTH']),

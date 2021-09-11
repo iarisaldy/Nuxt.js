@@ -42,12 +42,20 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
-    'cookie-universal-nuxt'
+    '@nuxtjs/auth-next'
   ],
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/'
+    },
     strategies: {
       local: {
+        cookie: {
+          // (optional) If set we check this cookie existence for loggedIn check
+          name: 'api-token',
+        },
         token: {
           property: 'data',
           global: true,
@@ -56,7 +64,7 @@ export default {
         },
         user: {
           property: 'data',
-          autoFetch: true
+          //autoFetch: true
         },
         endpoints: {
           login:{url:'/login', method:'post'},
