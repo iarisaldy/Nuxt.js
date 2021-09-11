@@ -12,11 +12,8 @@ export const actions = {
     nuxtServerInit({commit},context){
         if(context.route.name='login'){
             commit('SET_IS_AUTH', false) 
-            console.log('ok')
        }else{
             commit('SET_IS_AUTH', true)
-           console.log('error')
        }
-        console.log(context.route.name)
     }
 }
