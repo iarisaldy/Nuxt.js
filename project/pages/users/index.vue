@@ -3,9 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-                    <button class="btn btn-primary float-right btn-sm">
-                        Add New
-                    </button>
+                   Table Data User
                 </h4>
             </div>
             <div class="card-body">
