@@ -24,7 +24,7 @@ class CreateTableUser extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->string('api_token',40);
-            $table->char('role')->comment('0: admin, 1: drivers, 2: users');
+            $table->char('role')->comment('0: admin, 1: users');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
