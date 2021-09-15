@@ -9,12 +9,12 @@ export const mutations = {
 }
 
 export const actions = {
-    // getUsersData({commit}){
-    //     return new Promise((resolve, reject)=>{
-    //         this.$axios.get('').then((response)=>{
-    //             commit('SET_USER_DATA', response.data.data)
-    //             resolve()
-    //         })
-    //     })
-    // }
+    getUsersData({commit}){
+        return new Promise((resolve, reject)=>{
+            this.$axios.get('').then((response)=>{
+                commit('SET_USER_DATA', response.data.data)
+                resolve()
+            })
+        })
+    }
 }
