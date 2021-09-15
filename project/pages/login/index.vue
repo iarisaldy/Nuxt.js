@@ -61,17 +61,20 @@ export default {
         if(this.$auth.loggedIn){
             this.$router.push('/')
             this.SET_IS_AUTH(true)
+        }else{
+        this.SET_IS_AUTH(false)
         }
     },
 	methods:{
         ...mapMutations(['SET_IS_AUTH']),
-		submit(){
-            this.$auth.loginWith('local', {
+		async submit(){
+           await this.$auth.loginWith('local', {
                  data: {
                      email:this.auth.email,
                      password:this.auth.password 
                  }
             }).then(()=>{
+                console.log(this.$auth.$state.user.api_token)
                 this.SET_IS_AUTH(true)
                 this.$router.push('/')
             })

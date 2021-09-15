@@ -11,7 +11,7 @@ export const mutations = {
 export const actions = {
     getUsersData({commit}){
         return new Promise((resolve, reject)=>{
-            this.$axios.get('').then((response)=>{
+            this.$axios.get('/users').then((response)=>{
                 commit('SET_USER_DATA', response.data.data)
                 resolve()
             })

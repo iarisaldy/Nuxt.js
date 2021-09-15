@@ -55,13 +55,12 @@ export default {
     strategies: {
       local: {
         cookie: {
-          // (optional) If set we check this cookie existence for loggedIn check
-          name: 'api-token',
+          //name: 'api-token',
         },
         token: {
           property: 'data',
-          global: true,
-          required: true,
+          //global: true,
+          //required: true,
           type: 'Bearer'
         },
         user: {
