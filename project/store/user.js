@@ -16,5 +16,16 @@ export const actions = {
                 resolve()
             })
         })
+    },
+    storeUsersData({commit},payload){
+        return new Promise((resolve, reject)=>{
+            this.$axios.post('/users',payload)
+            .then((response)=>{
+                resolve()
+                commit('SET_USER_DATA', response.data.data)
+            })
+            .catch((error) =>{
+            })
+        })
     }
 }

@@ -22,12 +22,12 @@ $router->get('/key',function(){
 });
 
 $router->post('/API/login','UserController@login');
+$router->post('/API/users','UserController@store');
 $router->post('/API/reset','UserController@sendResetPassword');
 $router->put('/API/reset/{token}','UserController@verifyResetPassword');
 
 $router->group(['middleware' =>'auth'], function() use($router){
     $router->get('/API/users','UserController@index');
-    $router->post('/API/users','UserController@store');
     $router->get('/API/users/login','UserController@getUserLogin'); 
     $router->get('/API/users/{id}','UserController@edit');
     $router->put('/API/users/{id}','UserController@update');
