@@ -9,7 +9,7 @@
             <div class="card-body">
                 <b-table striped hover :items="users.data" :fields="fields" show-empty>
                     <template v-slot:cell(role)="row">
-                        <p>{{row.item.role ? 'Admin':'Users' }}</p>   
+                        <p>{{row.item.role === '1' ? 'Users':'Admin'}}</p>   
                     </template>
                     <template v-slot:cell(action)>
                         <button class="btn btn-primary"><i class="fa fa-edit"></i></button> 
